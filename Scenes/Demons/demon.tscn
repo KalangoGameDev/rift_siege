@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://d0drbov7qjn3h"]
+
+[ext_resource type="Script" uid="uid://bkl0ayftcwd40" path="res://Scenes/Demons/demon.gd" id="1_dv6x7"]
+[ext_resource type="Texture2D" uid="uid://d1m7lyud01gmi" path="res://sprites/demon.png" id="2_ti3bb"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_d21ai"]
+radius = 16.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_he0ud"]
+atlas = ExtResource("2_ti3bb")
+region = Rect2(1, 4, 30, 23)
+
+[node name="demon" type="CharacterBody2D" unique_id=536844644]
+scale = Vector2(2, 2)
+script = ExtResource("1_dv6x7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=83264263]
+position = Vector2(0, -2)
+shape = SubResource("CircleShape2D_d21ai")
+
+[node name="ColorRect" type="TextureRect" parent="." unique_id=1701528902]
+offset_left = -15.0
+offset_top = -12.0
+offset_right = 15.0
+offset_bottom = 11.0
+texture = SubResource("AtlasTexture_he0ud")
+stretch_mode = 2
+metadata/_edit_use_anchors_ = true

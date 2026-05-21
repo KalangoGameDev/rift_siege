@@ -1,0 +1,113 @@
+[gd_scene format=3 uid="uid://77vays8evmd6"]
+
+[ext_resource type="Script" uid="uid://dw3vux8xxpo21" path="res://Scenes/MainMenu/main_menu.gd" id="1_uqdog"]
+[ext_resource type="Shader" uid="uid://baw1i3vdgmpjh" path="res://Scenes/Upgrade/glitch.gdshader" id="2_0qgbs"]
+[ext_resource type="Texture2D" uid="uid://b11d3ekvjfap5" path="res://icon.svg" id="3_adu2g"]
+[ext_resource type="Shader" uid="uid://gj87f6woij4e" path="res://shaders/circuit.gdshader" id="4_0l8wx"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_n5jej"]
+shader = ExtResource("2_0qgbs")
+shader_parameter/cell_size = 6.0
+shader_parameter/dot_size = 0.10000000475
+shader_parameter/background_color = Color(0.101960786, 0.101960786, 0.101960786, 0)
+shader_parameter/dot_color = Color(1, 1, 1, 0.21568628)
+shader_parameter/offset = Vector2(0, 0)
+shader_parameter/smoothness = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2r307"]
+shader = ExtResource("4_0l8wx")
+shader_parameter/line_width = 0.0010000000475
+shader_parameter/segment_count = 10
+shader_parameter/segment_length = 0.3099999967962
+shader_parameter/tail_lag = 0.4
+shader_parameter/line_colour = Color(1, 0, 0, 1)
+shader_parameter/head_size_multiplier = 1.0000000149012
+shader_parameter/head_colour = Color(1, 1, 0, 1)
+shader_parameter/line_count = 60
+shader_parameter/line_lifetime = 8.00000035625
+shader_parameter/start_direction_degrees = 0.0
+shader_parameter/random_start_direction = true
+shader_parameter/only_on_colour = false
+shader_parameter/apply_colour = Color(0, 0, 0, 1)
+shader_parameter/use_albedo_texture = false
+shader_parameter/albedo_modulate = Color(1, 1, 1, 1)
+
+[node name="MainMenu" type="CanvasLayer" unique_id=135176012]
+script = ExtResource("1_uqdog")
+
+[node name="Control" type="Control" parent="." unique_id=1265703387]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="Control" unique_id=1425602534]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="ColorRect2" type="TextureRect" parent="Control/ColorRect" unique_id=434736607]
+material = SubResource("ShaderMaterial_n5jej")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_adu2g")
+
+[node name="ColorRect" type="ColorRect" parent="Control/ColorRect" unique_id=197745630]
+material = SubResource("ShaderMaterial_2r307")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/ColorRect" unique_id=922468257]
+layout_mode = 0
+offset_left = 1002.0
+offset_top = 37.0
+offset_right = 1102.0
+offset_bottom = 243.0
+
+[node name="label" type="Label" parent="Control/ColorRect/VBoxContainer" unique_id=235591864]
+layout_mode = 2
+text = "HIGH SCORE:
+"
+
+[node name="high_score" type="Label" parent="Control/ColorRect/VBoxContainer" unique_id=901468332]
+unique_name_in_owner = true
+layout_mode = 2
+text = "1.
+2.
+3.
+"
+
+[node name="play_button" type="Button" parent="Control/ColorRect/VBoxContainer" unique_id=496343164]
+unique_name_in_owner = true
+layout_mode = 2
+text = "PLAY"
+
+[node name="how_to_play__button" type="Button" parent="Control/ColorRect/VBoxContainer" unique_id=1530141688]
+unique_name_in_owner = true
+layout_mode = 2
+text = "TUTORIAL"
+
+[node name="options_button" type="Button" parent="Control/ColorRect/VBoxContainer" unique_id=2017921346]
+unique_name_in_owner = true
+layout_mode = 2
+text = "OPTIONS"
+
+[node name="exit_button" type="Button" parent="Control/ColorRect/VBoxContainer" unique_id=157029843]
+unique_name_in_owner = true
+layout_mode = 2
+text = "EXIT"

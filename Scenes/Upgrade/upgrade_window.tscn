@@ -1,0 +1,79 @@
+[gd_scene format=3 uid="uid://bkdq0eef5ogt2"]
+
+[ext_resource type="Script" uid="uid://cbd6qypfyds5u" path="res://Scenes/Upgrade/upgrade_window.gd" id="1_acj4i"]
+[ext_resource type="Shader" uid="uid://gj87f6woij4e" path="res://shaders/circuit.gdshader" id="2_nucbf"]
+[ext_resource type="Shader" uid="uid://baw1i3vdgmpjh" path="res://Scenes/Upgrade/glitch.gdshader" id="3_6x1kw"]
+[ext_resource type="Texture2D" uid="uid://b11d3ekvjfap5" path="res://icon.svg" id="4_a3ei8"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cv8ju"]
+shader = ExtResource("2_nucbf")
+shader_parameter/line_width = 0.0010000000475
+shader_parameter/segment_count = 10
+shader_parameter/segment_length = 0.3099999967962
+shader_parameter/tail_lag = 0.4
+shader_parameter/line_colour = Color(1, 0, 0, 1)
+shader_parameter/head_size_multiplier = 1.0000000149012
+shader_parameter/head_colour = Color(1, 1, 0, 1)
+shader_parameter/line_count = 60
+shader_parameter/line_lifetime = 8.00000035625
+shader_parameter/start_direction_degrees = 0.0
+shader_parameter/random_start_direction = true
+shader_parameter/only_on_colour = false
+shader_parameter/apply_colour = Color(0, 0, 0, 1)
+shader_parameter/use_albedo_texture = false
+shader_parameter/albedo_modulate = Color(1, 1, 1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xemw4"]
+shader = ExtResource("3_6x1kw")
+shader_parameter/cell_size = 6.0
+shader_parameter/dot_size = 0.10000000475
+shader_parameter/background_color = Color(0.101960786, 0.101960786, 0.101960786, 0)
+shader_parameter/dot_color = Color(1, 1, 1, 0.21568628)
+shader_parameter/offset = Vector2(0, 0)
+shader_parameter/smoothness = 1.0
+
+[node name="Upgrade" type="CanvasLayer" unique_id=567573329]
+script = ExtResource("1_acj4i")
+
+[node name="Control" type="Control" parent="." unique_id=1321169812]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_behavior_recursive = 2
+
+[node name="ColorRect" type="ColorRect" parent="Control" unique_id=1491795727]
+material = SubResource("ShaderMaterial_cv8ju")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="ColorRect2" type="TextureRect" parent="Control/ColorRect" unique_id=418708273]
+material = SubResource("ShaderMaterial_xemw4")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_a3ei8")
+
+[node name="upgrade_card_container" type="GridContainer" parent="Control/ColorRect" unique_id=1859362136]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/h_separation = 48
+theme_override_constants/v_separation = 48
+columns = 5

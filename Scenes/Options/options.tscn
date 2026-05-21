@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://dyn6137r0meut"]
+
+[ext_resource type="Script" uid="uid://cgtlv87rq82ic" path="res://Scenes/Options/options.gd" id="1_oxfvm"]
+
+[node name="Options" type="CanvasLayer" unique_id=2101588307]
+visible = false
+script = ExtResource("1_oxfvm")

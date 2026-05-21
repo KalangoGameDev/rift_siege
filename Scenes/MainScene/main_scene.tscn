@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://dc4uo2g0cetjb"]
+
+[ext_resource type="PackedScene" uid="uid://dfdo006gsy88t" path="res://Scenes/BattleScene/battle_scene.tscn" id="1_2c62f"]
+[ext_resource type="Script" uid="uid://cr0hwvgqg8ov8" path="res://Scenes/MainScene/main_scene.gd" id="1_hq1ik"]
+[ext_resource type="PackedScene" uid="uid://bkdq0eef5ogt2" path="res://Scenes/Upgrade/upgrade_window.tscn" id="3_vgqhn"]
+
+[node name="main_scene" type="Node" unique_id=97733875]
+script = ExtResource("1_hq1ik")
+
+[node name="scene_stage" type="Node" parent="." unique_id=817440163]
+
+[node name="battle_scene" parent="scene_stage" unique_id=1604822988 instance=ExtResource("1_2c62f")]
+unique_name_in_owner = true
+
+[node name="canvas" type="Node" parent="scene_stage" unique_id=1901835617]
+unique_name_in_owner = true
+
+[node name="Upgrade" parent="scene_stage/canvas" unique_id=567573329 instance=ExtResource("3_vgqhn")]

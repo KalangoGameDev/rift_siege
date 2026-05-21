@@ -1,0 +1,207 @@
+[gd_scene format=3 uid="uid://dcyntlgmbmk1g"]
+
+[ext_resource type="Script" uid="uid://dkagartt30pob" path="res://Scenes/Upgrade/upgrade_card.gd" id="1_k8fah"]
+[ext_resource type="Resource" uid="uid://cx4ni2fpahgnu" path="res://Scenes/resources/Upgrade.tres" id="2_285jk"]
+[ext_resource type="Shader" uid="uid://bwa5sjos5inrw" path="res://shaders/halo.gdshader" id="3_5738h"]
+[ext_resource type="Texture2D" uid="uid://bn1qprqhl0psn" path="res://icons.png" id="4_6tkje"]
+[ext_resource type="Shader" uid="uid://blmemveg8as4m" path="res://shaders/margin.gdshader" id="4_mtl57"]
+[ext_resource type="Texture2D" uid="uid://qs8sujs5oo3u" path="res://sprites/icons.png" id="4_u347p"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lqovl"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mtl57"]
+shader = ExtResource("3_5738h")
+shader_parameter/pixelation = Vector2(300, 300)
+shader_parameter/gradient_steps = 64.0
+shader_parameter/spread = 0.33
+shader_parameter/size = 0.365
+shader_parameter/speed = 1.0
+shader_parameter/ray1_density = 8.5
+shader_parameter/ray2_density = 8.5
+shader_parameter/ray2_intensity = 0.5
+shader_parameter/core_intensity = 2.0
+shader_parameter/hdr = true
+shader_parameter/seed = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fabi2"]
+shader = ExtResource("4_mtl57")
+shader_parameter/border_color = Color(1, 1, 1, 1)
+shader_parameter/rect_size_px = Vector2(41.435, 40)
+shader_parameter/border_thickness_px = 1.0
+shader_parameter/gap_between_corners_px = 30.0
+shader_parameter/min_corner_px = 4.0
+shader_parameter/feather_px = 0.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mtl57"]
+atlas = ExtResource("4_u347p")
+region = Rect2(0, 192, 128, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u347p"]
+atlas = ExtResource("4_6tkje")
+region = Rect2(0, 64, 64, 64)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_i0sum"]
+
+[node name="upgrade_card" type="Control" unique_id=444412790]
+material = SubResource("ShaderMaterial_lqovl")
+custom_minimum_size = Vector2(135, 200)
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -67.5
+offset_top = -100.0
+offset_right = 67.5
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("1_k8fah")
+upgrade_scene = ExtResource("2_285jk")
+
+[node name="halo" type="ColorRect" parent="." unique_id=636531773]
+material = SubResource("ShaderMaterial_mtl57")
+custom_minimum_size = Vector2(350, 350)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -87.5
+offset_top = -56.0
+offset_right = 77.5
+offset_bottom = 44.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="selection_border" type="ColorRect" parent="." unique_id=1990324638]
+unique_name_in_owner = true
+z_index = 1
+material = SubResource("ShaderMaterial_fabi2")
+custom_minimum_size = Vector2(143, 210)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="card_bg" type="TextureRect" parent="." unique_id=1489146137]
+unique_name_in_owner = true
+z_index = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = -96.0
+offset_right = 64.0
+offset_bottom = 96.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_mtl57")
+
+[node name="MarginContainer" type="MarginContainer" parent="card_bg" unique_id=860805903]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="card_bg" unique_id=434246766]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="upgrade_name" type="Label" parent="card_bg/VBoxContainer" unique_id=1816271382]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 3
+text = "NAME"
+horizontal_alignment = 1
+
+[node name="upgrade_icon" type="ColorRect" parent="card_bg/VBoxContainer" unique_id=1877961609]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+color = Color(0, 0, 0, 1)
+
+[node name="upgrade_icon2" type="TextureRect" parent="card_bg/VBoxContainer/upgrade_icon" unique_id=2135317034]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -30.0
+offset_top = -30.0
+offset_right = 30.0
+offset_bottom = 30.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+texture = SubResource("AtlasTexture_u347p")
+
+[node name="upgrade_rarity" type="Label" parent="card_bg/VBoxContainer" unique_id=214840409]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/outline_size = 3
+theme_override_constants/shadow_outline_size = 3
+theme_override_font_sizes/font_size = 12
+text = "RARITY"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="upgrade_description" type="Label" parent="card_bg/VBoxContainer" unique_id=952559689]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/outline_size = 3
+theme_override_constants/shadow_outline_size = 3
+text = "DESCRIPTION"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="upgrade_button" type="TextureButton" parent="." unique_id=495862215]
+unique_name_in_owner = true
+z_index = 5
+material = SubResource("ShaderMaterial_i0sum")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_behavior_recursive = 2
