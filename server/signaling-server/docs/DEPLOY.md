@@ -5,7 +5,7 @@ Este documento descreve a publicação do servidor de sinalização em contêine
 ## Build
 
 ```bash
-cd rift_siege/infra/signaling-server
+cd server/signaling-server
 docker build -t rift-siege-signaling .
 ```
 
@@ -14,4 +14,3 @@ docker build -t rift-siege-signaling .
 ```bash
 docker run --rm -p 8080:8080 -e PSK=secret123 rift-siege-signaling
 ```
-

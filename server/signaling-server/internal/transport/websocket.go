@@ -1,7 +1,7 @@
 package transport
 
 import (
-	"rift-siege/infra/signaling-server/internal/signaling"
+	"rift-siege/server/signaling-server/internal/signaling"
 	"log"
 	"net/http"
 	"os"
@@ -45,4 +45,3 @@ func HandleWebSocket(hub *signaling.Hub, w http.ResponseWriter, r *http.Request)
 	go client.WritePump()
 	go client.ReadPump()
 }
-

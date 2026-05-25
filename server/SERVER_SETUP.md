@@ -41,6 +41,5 @@ docker network create signaling_net || true
 After deployment, verify services are running:
 ```bash
 docker ps | grep -E "coturn|signaling"
-# Should show 'coturn-server' and 'coop-game-server-signaling'
+# Should show 'coturn-server' and 'rift-siege-signaling'
 ```
-

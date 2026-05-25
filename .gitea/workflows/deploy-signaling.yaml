@@ -6,10 +6,10 @@ on:
     branches:
       - main
     paths:
-      - "rift_siege/infra/signaling-server/**"
-      - "rift_siege/infra/apps/coop-server/docker-compose.yml"
-      - "rift_siege/infra/apps/coturn/docker-compose.yml"
-      - "rift_siege/.gitea/workflows/deploy-signaling.yaml"
+      - "server/signaling-server/**"
+      - "server/apps/coop-server/docker-compose.yml"
+      - "server/apps/coturn/docker-compose.yml"
+      - ".gitea/workflows/deploy-signaling.yaml"
 
 jobs:
   build-and-push:
@@ -28,7 +28,7 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v4
         with:
-          context: ./rift_siege/infra/signaling-server
+          context: ./server/signaling-server
           push: true
           tags: gitea.nilbyte.com.br/nilbyte/rift-siege/signaling:latest
 
@@ -46,14 +46,14 @@ jobs:
             sh -c "
               echo 'Deploying Signaling Server...'
               mkdir -p /infra/apps/coop-server
-              cp /workspace/rift_siege/infra/apps/coop-server/docker-compose.yml /infra/apps/coop-server/docker-compose.yml
+              cp /workspace/server/apps/coop-server/docker-compose.yml /infra/apps/coop-server/docker-compose.yml
               cd /infra/apps/coop-server
               docker compose pull signaling-server
               docker compose up -d signaling-server
 
               echo 'Deploying Coturn...'
               mkdir -p /infra/apps/coturn
-              cp /workspace/rift_siege/infra/apps/coturn/docker-compose.yml /infra/apps/coturn/docker-compose.yml
+              cp /workspace/server/apps/coturn/docker-compose.yml /infra/apps/coturn/docker-compose.yml
               cd /infra/apps/coturn
               docker compose up -d
 

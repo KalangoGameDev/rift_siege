@@ -20,4 +20,3 @@ Mensagens JSON suportadas:
 - `offer`
 - `answer`
 - `candidate`
-

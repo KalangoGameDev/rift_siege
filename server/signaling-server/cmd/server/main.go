@@ -9,8 +9,8 @@ import (
 	"strings"
 	"time"
 
-	"rift-siege/infra/signaling-server/internal/signaling"
-	"rift-siege/infra/signaling-server/internal/transport"
+	"rift-siege/server/signaling-server/internal/signaling"
+	"rift-siege/server/signaling-server/internal/transport"
 )
 
 func main() {
@@ -76,4 +76,3 @@ func getOutboundIP() net.IP {
 
 	return localAddr.IP
 }
-
