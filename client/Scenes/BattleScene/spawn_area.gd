@@ -5,7 +5,7 @@ const DEMON = preload("uid://d0drbov7qjn3h")
 @onready var battle_scene: Node2D = $".."
 
 var tick: int = 0
-var spawn_time = clamp(10, 0, 100)
+var spawn_time: int = clamp(10, 0, 100)
 
 func _ready() -> void:
 	Gamecontrol.tick.connect(_tick)
@@ -18,7 +18,7 @@ func _tick() -> void:
 	
 	if tick >= spawn_time:
 		spawn_time = max(10, 101 - battle_scene.threat_level)
-		var spawn_count := int(battle_scene.threat_level / 2) + 1
+		var spawn_count: int = int(battle_scene.threat_level / 2) + 1
 		
 		for i in range(spawn_count):
 			instantiate_demon()
@@ -29,13 +29,13 @@ func instantiate_demon() -> void:
 	var shape: RectangleShape2D = area_shape.shape
 	var extents: Vector2 = shape.extents
 
-	var local_pos := Vector2(
+	var local_pos: Vector2 = Vector2(
 		randf_range(-extents.x, extents.x),
 		randf_range(-extents.y, extents.y)
 	)
 
-	var global_pos := area_shape.global_position + local_pos
-	var wait_time := max(1, 20 - battle_scene.threat_level)
+	var global_pos: Vector2 = area_shape.global_position + local_pos
+	var wait_time: int = max(1, 20 - battle_scene.threat_level)
 
 	if multiplayer.has_multiplayer_peer():
 		network_spawn_demon.rpc(global_pos, wait_time)

@@ -131,7 +131,7 @@ func _get_remote_player(id: int) -> Node:
 			return player_node
 
 	if battle_scene.remote_players and battle_scene.remote_players.has_node(str(id)):
-		var node := battle_scene.remote_players.get_node(str(id))
+		var node: Node = battle_scene.remote_players.get_node(str(id))
 		remote_players[id] = node
 		return node
 

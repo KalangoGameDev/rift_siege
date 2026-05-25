@@ -41,11 +41,12 @@ func set_player_mode(local_player: bool, peer_id: int = 0) -> void:
 	elif network_peer_id <= 0:
 		network_peer_id = multiplayer.get_unique_id() if multiplayer.has_multiplayer_peer() else 1
 
-	set_multiplayer_authority(network_peer_id)
-	if is_node_ready() and camera:
-		camera.current = is_local_player
-	if is_local_player:
-		camera.make_current()
+		set_multiplayer_authority(network_peer_id)
+		if is_local_player:
+			if is_node_ready() and camera:
+				camera.make_current()
+		elif is_node_ready() and camera and camera.is_current():
+			camera.clear_current()
 
 func _get_current_peer_id() -> int:
 	if Signaling.my_id != 0:

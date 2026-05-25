@@ -48,7 +48,7 @@ func start_network(server_url: String) -> void:
 func set_ice_configuration(urls: String, username: String = "", credential: String = "") -> void:
 	ice_config.clear()
 	if not urls.is_empty():
-		var server := {"urls": [urls]}
+		var server: Dictionary = {"urls": [urls]}
 		if not username.is_empty():
 			server["username"] = username
 		if not credential.is_empty():
@@ -63,14 +63,14 @@ func _on_peers_updated(peers_data: Variant) -> void:
 	elif peers_data is Dictionary:
 		active_peers = peers_data.keys()
 
-	var my_id := Signaling.my_id
+	var my_id: int = Signaling.my_id
 	if my_id == 0:
 		return
 
 	print("NetworkManager: Active peers updated: ", active_peers)
 
 	for peer_id_var in active_peers:
-		var peer_id := int(peer_id_var)
+		var peer_id: int = int(peer_id_var)
 		if peer_id == my_id:
 			continue
 		if peers.has(peer_id):
@@ -97,11 +97,11 @@ func connect_to_peer(target_id: int) -> void:
 		return
 
 	print("NetworkManager: Initiating connection to ", target_id)
-	var peer := _create_peer_connection(target_id)
+	var peer: WebRTCPeerConnection = _create_peer_connection(target_id)
 	peer.create_offer()
 
 func _create_peer_connection(id: int) -> WebRTCPeerConnection:
-	var peer := WebRTCPeerConnection.new()
+	var peer: WebRTCPeerConnection = WebRTCPeerConnection.new()
 	peer.initialize({
 		"iceServers": ice_config
 	})

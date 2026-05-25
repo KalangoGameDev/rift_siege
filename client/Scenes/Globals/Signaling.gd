@@ -4,7 +4,7 @@ signal message_received(type: String, data: Variant, sender_id: int)
 signal connected_to_server(my_id: int)
 signal peers_updated(peers: Variant)
 
-var socket := WebSocketPeer.new()
+var socket: WebSocketPeer = WebSocketPeer.new()
 var is_connected_to_server := false
 var my_id: int = 0
 var peers_cache: Variant = []
@@ -27,7 +27,7 @@ func connect_to_url(url: String) -> void:
 	if server_url.is_empty():
 		return
 
-	var final_url := server_url
+	var final_url: String = server_url
 	if not server_secret_key.is_empty():
 		if "?" in final_url:
 			final_url += "&key=" + server_secret_key.uri_encode()
@@ -43,7 +43,7 @@ func _on_reconnect_timer_timeout() -> void:
 
 func _process(_delta: float) -> void:
 	socket.poll()
-	var state := socket.get_ready_state()
+	var state: int = socket.get_ready_state()
 
 	if state == WebSocketPeer.STATE_OPEN:
 		if not is_connected_to_server:
@@ -52,11 +52,11 @@ func _process(_delta: float) -> void:
 			reconnect_timer.stop()
 
 		while socket.get_available_packet_count() > 0:
-			var packet := socket.get_packet()
-			var data_str := packet.get_string_from_utf8()
+			var packet: PackedByteArray = socket.get_packet()
+			var data_str: String = packet.get_string_from_utf8()
 			if data_str.is_empty():
 				continue
-			var parsed := JSON.parse_string(data_str)
+			var parsed: Variant = JSON.parse_string(data_str)
 			if parsed is Dictionary:
 				_handle_message(parsed)
 
@@ -73,7 +73,7 @@ func send(type: String, data: Variant, target_id: int = 0) -> void:
 	if socket.get_ready_state() != WebSocketPeer.STATE_OPEN:
 		return
 
-	var msg := {
+	var msg: Dictionary = {
 		"type": type,
 		"data": data,
 		"target": target_id
@@ -84,8 +84,8 @@ func _handle_message(msg: Dictionary) -> void:
 	if not msg.has("type"):
 		return
 
-	var type := str(msg["type"])
-	var data := msg.get("data")
+	var type: String = str(msg["type"])
+	var data: Variant = msg.get("data")
 	var sender := int(msg.get("sender", 0))
 
 	match type:
