@@ -12,7 +12,7 @@ services:
     restart: unless-stopped
 
   coturn:
-    image: coturn/coturn:4.6.2
+    image: docker.io/coturn/coturn:4.6.2
     container_name: coturn-server
     network_mode: host
     restart: unless-stopped
@@ -31,4 +31,3 @@ services:
       - --user=${TURN_USER:-nilbyte}:${TURN_PASSWORD:-secret123}
       - --lt-cred-mech
       - --realm=${TURN_REALM:-nilbyte.com.br}
-
