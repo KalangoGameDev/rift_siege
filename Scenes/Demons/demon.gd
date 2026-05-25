@@ -20,10 +20,11 @@ func _tick() -> void:
 		global_position.y += 40
 		tick = 0
 
-func take_damage(value: int) -> void:
+func take_damage(value: int, attacker_id: int = 0) -> void:
 	health -= value
 	if health <= 0:
-		Player.gain_exp(200)
+		if attacker_id == 0 or attacker_id == multiplayer.get_unique_id():
+			Player.gain_exp(200)
 		die()
 		
 

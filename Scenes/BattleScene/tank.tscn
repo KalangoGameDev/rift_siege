@@ -1,0 +1,71 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://Scenes/BattleScene/tank.gd" id="1_tank"]
+[ext_resource type="Texture2D" path="res://sprites/cannon.png" id="2_cannon"]
+[ext_resource type="Texture2D" path="res://sprites/tank.png" id="3_tank"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0"]
+atlas = ExtResource("3_tank")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1"]
+atlas = ExtResource("3_tank")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2"]
+atlas = ExtResource("3_tank")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3"]
+atlas = ExtResource("3_tank")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3")
+}],
+"loop": true,
+"name": &"default",
+"speed": 9.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0"]
+size = Vector2(32, 32)
+
+[node name="tank" type="CharacterBody2D"]
+unique_name_in_owner = true
+position = Vector2(1790, 585)
+platform_wall_layers = 1
+safe_margin = 0.1
+script = ExtResource("1_tank")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(-11, -546)
+zoom = Vector2(0.5, 0.5)
+
+[node name="cannon" type="Sprite2D" parent="."]
+position = Vector2(0, -1)
+texture = ExtResource("2_cannon")
+centered = false
+offset = Vector2(0, -2)
+
+[node name="muzzle" type="Node2D" parent="cannon"]
+position = Vector2(22, 0)
+
+[node name="tank_sprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_0")
+frame_progress = 0.01563766
+
+[node name="tank_collision" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_0")

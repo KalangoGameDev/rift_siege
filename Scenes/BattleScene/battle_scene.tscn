@@ -124,6 +124,9 @@ frame_progress = 0.01563766
 [node name="tank_collision" type="CollisionShape2D" parent="tank" unique_id=780795311]
 shape = SubResource("RectangleShape2D_0e48y")
 
+[node name="remote_players" type="Node2D" parent="." unique_id=214748364]
+unique_name_in_owner = true
+
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=2045139220]
 position = Vector2(1813.5001, 722)
 scale = Vector2(5.147657, 242.00006)

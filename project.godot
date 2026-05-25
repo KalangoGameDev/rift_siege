@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="KalangoJam01"
+config/name="Rift Siege"
 run/main_scene="uid://dc4uo2g0cetjb"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://icon.svg"
@@ -19,6 +19,8 @@ config/icon="res://icon.svg"
 
 Gamecontrol="*uid://bvwqxec1w4vi"
 Player="*uid://busslw07i8kl2"
+Signaling="*res://Scenes/Globals/Signaling.gd"
+NetworkManager="*res://Scenes/Globals/NetworkManager.gd"
 
 [editor]
 

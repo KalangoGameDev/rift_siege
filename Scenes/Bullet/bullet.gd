@@ -2,6 +2,7 @@ extends Node2D
 class_name Bullet
 
 var damage: int
+var owner_id: int = 0
 var speed: float = 600.0
 var tick: int
 var lifetime: int = 10
@@ -16,7 +17,7 @@ func _ready() -> void:
 
 func _on_body_entered(body: Node) -> void:
 	if body is Demon:
-		body.take_damage(damage)
+		body.take_damage(damage, owner_id)
 		_destroy()
 	
 
@@ -29,8 +30,12 @@ func _process(delta: float) -> void:
 	global_position += direction * speed * delta
 
 func fire() -> void:
-	var mouse_pos := get_global_mouse_position()
-	direction = (mouse_pos - global_position).normalized()
+	fire_direction((get_global_mouse_position() - global_position).normalized())
+
+func fire_direction(new_direction: Vector2) -> void:
+	if new_direction == Vector2.ZERO:
+		new_direction = Vector2.RIGHT
+	direction = new_direction.normalized()
 
 func _destroy() -> void:
 	queue_free()

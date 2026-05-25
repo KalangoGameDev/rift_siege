@@ -4,6 +4,7 @@
 [ext_resource type="Shader" uid="uid://baw1i3vdgmpjh" path="res://Scenes/Upgrade/glitch.gdshader" id="2_0qgbs"]
 [ext_resource type="Texture2D" uid="uid://b11d3ekvjfap5" path="res://icon.svg" id="3_adu2g"]
 [ext_resource type="Shader" uid="uid://gj87f6woij4e" path="res://shaders/circuit.gdshader" id="4_0l8wx"]
+[ext_resource type="PackedScene" path="res://Scenes/Multiplayer/multiplayer_panel.tscn" id="5_mpnl"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_n5jej"]
 shader = ExtResource("2_0qgbs")
@@ -111,3 +112,10 @@ text = "OPTIONS"
 unique_name_in_owner = true
 layout_mode = 2
 text = "EXIT"
+
+[node name="MultiplayerPanel" parent="Control/ColorRect" instance=ExtResource("5_mpnl")]
+layout_mode = 0
+offset_left = 48.0
+offset_top = 300.0
+offset_right = 408.0
+offset_bottom = 660.0
