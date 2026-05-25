@@ -1,0 +1,17 @@
+services:
+  signaling-server:
+    build: .
+    image: gitea.nilbyte.com.br/nilbyte/rift-siege/signaling:latest
+    container_name: rift-siege-signaling
+    ports:
+      - "8080:8080"
+    environment:
+      - PSK=secret123
+    restart: unless-stopped
+    networks:
+      - signaling_net
+
+networks:
+  signaling_net:
+    driver: bridge
+

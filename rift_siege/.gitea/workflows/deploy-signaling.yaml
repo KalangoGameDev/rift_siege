@@ -1,0 +1,61 @@
+name: Build and Deploy
+run-name: ${{ github.actor }} is deploying Rift Siege Signaling Server
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "rift_siege/infra/signaling-server/**"
+      - "rift_siege/infra/apps/coop-server/docker-compose.yml"
+      - "rift_siege/infra/apps/coturn/docker-compose.yml"
+      - "rift_siege/.gitea/workflows/deploy-signaling.yaml"
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v3
+
+      - name: Login to Gitea Registry
+        uses: docker/login-action@v2
+        with:
+          registry: gitea.nilbyte.com.br
+          username: notNilton
+          password: ${{ secrets.PACKAGES_TOKEN }}
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v4
+        with:
+          context: ./rift_siege/infra/signaling-server
+          push: true
+          tags: gitea.nilbyte.com.br/nilbyte/rift-siege/signaling:latest
+
+  deploy-infra:
+    needs: build-and-push
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy on Infrastructure via Docker Socket
+        run: |
+          docker run --rm \
+            -v /var/run/docker.sock:/var/run/docker.sock \
+            -v /home/nilbyte/infra:/infra \
+            -v ${{ github.workspace }}:/workspace \
+            docker:cli \
+            sh -c "
+              echo 'Deploying Signaling Server...'
+              mkdir -p /infra/apps/coop-server
+              cp /workspace/rift_siege/infra/apps/coop-server/docker-compose.yml /infra/apps/coop-server/docker-compose.yml
+              cd /infra/apps/coop-server
+              docker compose pull signaling-server
+              docker compose up -d signaling-server
+
+              echo 'Deploying Coturn...'
+              mkdir -p /infra/apps/coturn
+              cp /workspace/rift_siege/infra/apps/coturn/docker-compose.yml /infra/apps/coturn/docker-compose.yml
+              cd /infra/apps/coturn
+              docker compose up -d
+
+              docker image prune -f
+            "

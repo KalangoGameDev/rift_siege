@@ -1,0 +1,27 @@
+version: "3.8"
+
+services:
+  coturn:
+    image: coturn/coturn:4.6.2
+    container_name: coturn-server
+    restart: always
+    network_mode: host
+    environment:
+      - TURN_REALM=nilbyte.com.br
+      - TURN_Listening_PORT=3478
+      - TURN_MIN_PORT=49152
+      - TURN_MAX_PORT=65535
+    command:
+      - -n
+      - --log-file=stdout
+      - --external-ip=173.212.207.80
+      - --listening-ip=0.0.0.0
+      - --min-port=49152
+      - --max-port=65535
+      - --user=nilbyte:secret123
+      - --lt-cred-mech
+      - --realm=nilbyte.com.br
+    ports:
+      - "3478:3478"
+      - "3478:3478/udp"
+
