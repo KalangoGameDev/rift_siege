@@ -18,7 +18,7 @@ var current_state: NetworkState = NetworkState.DISCONNECTED
 
 var ice_config: Array = [
 	{
-		"urls": ["turn:173.212.207.80:3478"],
+		"urls": ["turn:localhost:3478"],
 		"username": "nilbyte",
 		"credential": "secret123"
 	}

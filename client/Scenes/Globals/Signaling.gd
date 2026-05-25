@@ -9,7 +9,7 @@ var is_connected_to_server := false
 var my_id: int = 0
 var peers_cache: Variant = []
 
-var server_url := "ws://173.212.207.80:8080/ws"
+var server_url := "ws://localhost:8080/ws"
 var server_secret_key := "secret123"
 var reconnect_timer: Timer
 
