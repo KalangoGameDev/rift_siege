@@ -19,4 +19,4 @@ Repositório do jogo `Rift Siege`, organizado de forma horizontal:
    docker compose up -d
    ```
 2. Abra `client/` no Godot e execute o projeto normalmente.
-3. Se precisar mudar credenciais/IPs, exporte as variáveis `PSK`, `ADVERTISED_IP`, `TURN_EXTERNAL_IP`, `TURN_USER` e `TURN_PASSWORD`.
+3. Copie [.env.example](/home/notilton/Workspace/kalango-gamedev/rift_siege/.env.example) para `.env` e ajuste `PSK`, `ADVERTISED_IP`, `TURN_EXTERNAL_IP`, `TURN_USER` e `TURN_PASSWORD`.

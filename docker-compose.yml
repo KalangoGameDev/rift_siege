@@ -4,9 +4,8 @@ services:
       context: ./server/signaling-server
     image: rift-siege-signaling:dev
     container_name: rift-siege-signaling
-    environment:
-      PSK: ${PSK:-secret123}
-      ADVERTISED_IP: ${ADVERTISED_IP:-127.0.0.1}
+    env_file:
+      - .env
     ports:
       - "8080:8080"
     restart: unless-stopped
@@ -16,18 +15,15 @@ services:
     container_name: coturn-server
     network_mode: host
     restart: unless-stopped
-    environment:
-      TURN_REALM: ${TURN_REALM:-nilbyte.com.br}
-      TURN_Listening_PORT: ${TURN_PORT:-3478}
-      TURN_MIN_PORT: ${TURN_MIN_PORT:-49152}
-      TURN_MAX_PORT: ${TURN_MAX_PORT:-65535}
+    env_file:
+      - .env
     command:
       - -n
       - --log-file=stdout
-      - --external-ip=${TURN_EXTERNAL_IP:-127.0.0.1}
+      - --external-ip=${TURN_EXTERNAL_IP}
       - --listening-ip=0.0.0.0
-      - --min-port=${TURN_MIN_PORT:-49152}
-      - --max-port=${TURN_MAX_PORT:-65535}
-      - --user=${TURN_USER:-nilbyte}:${TURN_PASSWORD:-secret123}
+      - --min-port=${TURN_MIN_PORT}
+      - --max-port=${TURN_MAX_PORT}
+      - --user=${TURN_USER}:${TURN_PASSWORD}
       - --lt-cred-mech
-      - --realm=${TURN_REALM:-nilbyte.com.br}
+      - --realm=${TURN_REALM}
