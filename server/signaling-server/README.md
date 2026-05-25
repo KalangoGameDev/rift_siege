@@ -11,6 +11,12 @@ go run cmd/server/main.go
 
 O servidor sobe em `ws://localhost:8080/ws`.
 
+Se você estiver usando a stack de desenvolvimento da raiz do repositório, basta executar:
+
+```bash
+docker compose up -d
+```
+
 ## Protocolo
 
 Mensagens JSON suportadas:

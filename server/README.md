@@ -8,12 +8,16 @@ Este diretório contém a infraestrutura de multiplayer usada pelo cliente Godot
 
 ## Execução local
 
-1. Suba o servidor de sinalização:
+1. Suba a stack pela raiz do repositório:
+   ```bash
+   docker compose up -d
+   ```
+2. Ou rode o servidor de sinalização isolado:
    ```bash
    cd server/signaling-server
    go run cmd/server/main.go
    ```
-2. Suba o TURN:
+3. Ou rode o TURN isolado:
    ```bash
    cd server/apps/coturn
    docker compose up -d

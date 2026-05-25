@@ -43,3 +43,11 @@ After deployment, verify services are running:
 docker ps | grep -E "coturn|signaling"
 # Should show 'coturn-server' and 'rift-siege-signaling'
 ```
+
+## Local development
+
+From the repository root, use the dev compose:
+
+```bash
+docker compose up -d
+```
