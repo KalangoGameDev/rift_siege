@@ -9,6 +9,7 @@ var move_speed: float
 const BULLET = preload("uid://bknpcmye04u3x")
 @onready var cannon: Sprite2D = $cannon
 @onready var camera: Camera2D = $Camera2D
+@onready var tank_sprite: AnimatedSprite2D = $tank_sprite
 
 var fire_rate_timer: Timer
 var attack_ready: bool = true
@@ -72,6 +73,14 @@ func _physics_process(_delta: float) -> void:
 	velocity.x = direction * move_speed
 	velocity.y = 0
 	
+	if direction < 0:
+		tank_sprite.flip_h = true
+	else:
+		tank_sprite.flip_h = false
+	
+	if velocity.x > 0:
+		tank_sprite.play("default")
+	
 	move_and_slide()
 	
 	var mouse_pos := get_global_mouse_position()
@@ -122,7 +131,6 @@ func get_firerate_progress() -> float:
 	var firerate_progress: float = fire_rate_timer.time_left
 	return firerate_progress
 
-
 func reload() -> void:
 	reloading = true
 	update_reload_cooldown()
@@ -131,7 +139,6 @@ func reload() -> void:
 func on_reload_timeout() -> void:
 	Player.update_max_ammo()
 	reloading = false
-	
 
 func update_reload_cooldown() -> void:
 	var reload_cooldown: float = Player.reload_speed

@@ -6,6 +6,8 @@ const UPGRADE = preload("uid://bkdq0eef5ogt2")
 const GUI = preload("uid://6q8b0yd4w3fg")
 const BULLET_SCENE = preload("res://Scenes/Bullet/bullet.tscn")
 const TANK_SCENE = preload("res://Scenes/BattleScene/tank.tscn")
+const MULTIPLAYER_SCENE = preload("uid://bev3bm2jqfmct")
+const SOLO_PLAY = preload("uid://c2bta562xh4v8")
 
 @onready var battle_scene: Node2D = %battle_scene
 @onready var canvas: Node = %canvas
@@ -33,6 +35,22 @@ func instantiate_main_menu() -> void:
 	main_menu_scene = MAIN_MENU.instantiate()
 	main_menu_scene.main_scene = self
 	canvas.add_child(main_menu_scene)
+
+var solo_play_scene: Node = null
+func instantiate_solo_play() -> void:
+	solo_play_scene = SOLO_PLAY.instantiate()
+	solo_play_scene.main_scene = self
+	canvas.add_child(solo_play_scene)
+
+
+var multiplayer_scene: Node = null
+func instantiate_multiplayer_scene() -> void:
+	multiplayer_scene = MULTIPLAYER_SCENE.instantiate()
+	multiplayer_scene.main_scene = self
+	canvas.add_child(multiplayer_scene)
+
+
+
 
 var gui_scene: Node = null
 func instantiate_gui_scene() -> void:
